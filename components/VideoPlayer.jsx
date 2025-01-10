@@ -1,9 +1,15 @@
 "use client";
-import { useRef, useEffect } from "react";
+
+import { useState, useRef, useEffect } from "react";
 import { trackVideoEvent } from "../lib/analytics";
 
 export default function VideoPlayer() {
   const videoRef = useRef(null);
+  const [progressTracked, setProgressTracked] = useState({
+    25: false,
+    50: false,
+    75: false,
+  });
 
   useEffect(() => {
     const video = videoRef.current;
@@ -14,9 +20,13 @@ export default function VideoPlayer() {
     const trackEnded = () => trackVideoEvent("ended", "Video completed");
     const trackTimeUpdate = () => {
       const progress = Math.floor((video.currentTime / video.duration) * 100);
-      if (progress === 25) trackVideoEvent("progress", "25% watched");
-      if (progress === 50) trackVideoEvent("progress", "50% watched");
-      if (progress === 75) trackVideoEvent("progress", "75% watched");
+
+      [25, 50, 75].forEach((milestone) => {
+        if (progress >= milestone && !progressTracked[milestone]) {
+          trackVideoEvent("progress", `${milestone}% watched`);
+          setProgressTracked((prev) => ({ ...prev, [milestone]: true }));
+        }
+      });
     };
 
     video.addEventListener("play", trackPlay);
@@ -30,7 +40,7 @@ export default function VideoPlayer() {
       video.removeEventListener("ended", trackEnded);
       video.removeEventListener("timeupdate", trackTimeUpdate);
     };
-  }, []);
+  }, [progressTracked]);
 
   return (
     <video
