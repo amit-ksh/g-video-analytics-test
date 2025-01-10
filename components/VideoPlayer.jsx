@@ -5,32 +5,32 @@ import { trackVideoEvent } from "../lib/analytics";
 export default function VideoPlayer() {
   const videoRef = useRef(null);
 
-  //   useEffect(() => {
-  //     const video = videoRef.current;
-  //     if (!video) return;
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
 
-  //     const trackPlay = () => trackVideoEvent("play", "Video played");
-  //     const trackPause = () => trackVideoEvent("pause", "Video paused");
-  //     const trackEnded = () => trackVideoEvent("ended", "Video completed");
-  //     const trackTimeUpdate = () => {
-  //       const progress = Math.floor((video.currentTime / video.duration) * 100);
-  //       if (progress === 25) trackVideoEvent("progress", "25% watched");
-  //       if (progress === 50) trackVideoEvent("progress", "50% watched");
-  //       if (progress === 75) trackVideoEvent("progress", "75% watched");
-  //     };
+    const trackPlay = () => trackVideoEvent("play", "Video played");
+    const trackPause = () => trackVideoEvent("pause", "Video paused");
+    const trackEnded = () => trackVideoEvent("ended", "Video completed");
+    const trackTimeUpdate = () => {
+      const progress = Math.floor((video.currentTime / video.duration) * 100);
+      if (progress === 25) trackVideoEvent("progress", "25% watched");
+      if (progress === 50) trackVideoEvent("progress", "50% watched");
+      if (progress === 75) trackVideoEvent("progress", "75% watched");
+    };
 
-  //     video.addEventListener("play", trackPlay);
-  //     video.addEventListener("pause", trackPause);
-  //     video.addEventListener("ended", trackEnded);
-  //     video.addEventListener("timeupdate", trackTimeUpdate);
+    video.addEventListener("play", trackPlay);
+    video.addEventListener("pause", trackPause);
+    video.addEventListener("ended", trackEnded);
+    video.addEventListener("timeupdate", trackTimeUpdate);
 
-  //     return () => {
-  //       video.removeEventListener("play", trackPlay);
-  //       video.removeEventListener("pause", trackPause);
-  //       video.removeEventListener("ended", trackEnded);
-  //       video.removeEventListener("timeupdate", trackTimeUpdate);
-  //     };
-  //   }, []);
+    return () => {
+      video.removeEventListener("play", trackPlay);
+      video.removeEventListener("pause", trackPause);
+      video.removeEventListener("ended", trackEnded);
+      video.removeEventListener("timeupdate", trackTimeUpdate);
+    };
+  }, []);
 
   return (
     <video
