@@ -1,0 +1,623 @@
+{
+  "dimensionHeaders": [
+    {
+      "name": "country"
+    },
+    {
+      "name": "city"
+    },
+    {
+      "name": "eventName"
+    },
+    {
+      "name": "pagePath"
+    },
+    {
+      "name": "pageTitle"
+    }
+  ],
+  "metricHeaders": [
+    {
+      "name": "eventCount",
+      "type": "TYPE_INTEGER"
+    },
+    {
+      "name": "sessions",
+      "type": "TYPE_INTEGER"
+    }
+  ],
+  "rows": [
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "page_view",
+          "oneValue": "value"
+        },
+        {
+          "value": "/analytics",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "25",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "user_engagement",
+          "oneValue": "value"
+        },
+        {
+          "value": "/analytics",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "15",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "pause",
+          "oneValue": "value"
+        },
+        {
+          "value": "/54",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "9",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "play",
+          "oneValue": "value"
+        },
+        {
+          "value": "/54",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "9",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "pause",
+          "oneValue": "value"
+        },
+        {
+          "value": "/12",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "4",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "play",
+          "oneValue": "value"
+        },
+        {
+          "value": "/12",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "4",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "progress",
+          "oneValue": "value"
+        },
+        {
+          "value": "/54",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "4",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "progress",
+          "oneValue": "value"
+        },
+        {
+          "value": "/12",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "3",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "page_view",
+          "oneValue": "value"
+        },
+        {
+          "value": "/12",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "2",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "page_view",
+          "oneValue": "value"
+        },
+        {
+          "value": "/54",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "2",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "ended",
+          "oneValue": "value"
+        },
+        {
+          "value": "/12",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "ended",
+          "oneValue": "value"
+        },
+        {
+          "value": "/54",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "first_visit",
+          "oneValue": "value"
+        },
+        {
+          "value": "/12",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "pause",
+          "oneValue": "value"
+        },
+        {
+          "value": "/1",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "play",
+          "oneValue": "value"
+        },
+        {
+          "value": "/1",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "session_start",
+          "oneValue": "value"
+        },
+        {
+          "value": "/12",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "India",
+          "oneValue": "value"
+        },
+        {
+          "value": "Ranchi",
+          "oneValue": "value"
+        },
+        {
+          "value": "user_engagement",
+          "oneValue": "value"
+        },
+        {
+          "value": "/1",
+          "oneValue": "value"
+        },
+        {
+          "value": "Create Next App",
+          "oneValue": "value"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1",
+          "oneValue": "value"
+        },
+        {
+          "value": "1",
+          "oneValue": "value"
+        }
+      ]
+    }
+  ],
+  "totals": [],
+  "maximums": [],
+  "minimums": [],
+  "rowCount": 17,
+  "metadata": {
+    "samplingMetadatas": [],
+    "dataLossFromOtherRow": false,
+    "currencyCode": "USD",
+    "_currencyCode": "currencyCode",
+    "timeZone": "Etc/GMT",
+    "_timeZone": "timeZone"
+  },
+  "propertyQuota": null,
+  "kind": "analyticsData#runReport"
+}
