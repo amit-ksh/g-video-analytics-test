@@ -225,7 +225,7 @@ const VideoPlayer = () => {
           className="aspect-square w-full h-auto rounded-lg shadow-lg"
         >
           <source
-            src="https://assistant-app-uat-video-pipeline-s3.s3.ap-south-1.amazonaws.com/combined_clip_595afb47-2721-4dcc-afe4-eb759e0a783e.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAZESUWNFNI376LR4V%2F20250111%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20250111T080419Z&X-Amz-Expires=3600&X-Amz-Signature=cf4ef8dd367d21982558c546fd2aa8cecbea7704839b8d8e0489e9069347bb7d&X-Amz-SignedHeaders=host&x-id=GetObject"
+            src="https://assistant-app-uat-video-pipeline-s3.s3.amazonaws.com/combined_clip_2136481b-b6bd-4f95-943e-087c3525efb9.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZESUWNFNI376LR4V%2F20250111%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20250111T085850Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Security-Token=&X-Amz-Signature=25226a5837ab849aee0fb7cf7f76606d22f1e38a6cf35fc11e511ed8e7723d8b"
             type="video/mp4"
           />
           Your browser does not support the video tag.
