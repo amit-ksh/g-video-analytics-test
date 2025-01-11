@@ -213,9 +213,12 @@ const VideoPlayer = () => {
   }, [videoRef, progressTracked]);
 
   return (
-    <div className="max-w-xl mx-auto m-4">
+    <div className="h-full max-w-lg mx-auto flex flex-col justify-between gap-4">
+      {/* Filler to center the video element */}
+      <div></div>
+
       {/* Video Player */}
-      <div className="bg-black mb-4 md:mb-8 mx-4 rounded-lg overflow-hidden">
+      <div className="bg-black mx-4 rounded-lg overflow-hidden">
         <video
           ref={videoRef}
           controls
@@ -229,25 +232,23 @@ const VideoPlayer = () => {
         </video>
       </div>
 
-      <div className="bg-white p-4 md:p-6 mx-4 rounded-lg shadow-sm">
-        <div className="text-center mb-4">
-          <h2 className="text-base md:text-lg text-gray-700">
-            How was your experience?
-          </h2>
+      <div className="p-4 mx-4">
+        <div className="mt-auto text-center mb-2">
+          <h2 className="text-gray-700">How was your experience?</h2>
         </div>
 
-        <div className="grid grid-cols-5 gap-2 md:gap-4">
+        <div className="grid grid-cols-5 gap-3 md:gap-4">
           {moods.map((mood) => (
             <button
               key={mood.value}
               onClick={() => handleMoodSelect(mood)}
               className={cn(
-                "flex flex-col justify-center items-center aspect-square size-16 md:size-20 p-2 hover:bg-opacity-80 rounded-lg transition-colors group",
+                "flex flex-col justify-center items-center aspect-square size-16 p-2 hover:bg-opacity-80 rounded-lg transition-colors group",
                 mood.color,
                 selectedMood?.value === mood.value && "ring-2 ring-current"
               )}
             >
-              <div className="transition-colors size-6 md:size-8">
+              <div className="transition-colors size-6 md:size-7">
                 {mood.icon}
               </div>
               <span className="text-xs md:text-sm mt-1 text-nowrap">
@@ -256,98 +257,101 @@ const VideoPlayer = () => {
             </button>
           ))}
         </div>
+
+        <div className="mt-8 text-center text-sm font-medium text-gray-400">
+          Powered by <span className="font-semibold">SynthLabs</span>
+        </div>
+        {/* Detailed Feedback Dialog */}
+        <AlertDialog
+          open={showFeedbackDialog}
+          onOpenChange={setShowFeedbackDialog}
+        >
+          <AlertDialogContent className="max-w-md w-[95%] rounded-lg">
+            <AlertDialogHeader>
+              <AlertDialogTitle>Additional Feedback</AlertDialogTitle>
+              <AlertDialogDescription>
+                <div className="space-y-6 mt-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      How did you find this information useful?
+                    </label>
+                    <div className="flex gap-4">
+                      {ratingOptions.map((rating) => (
+                        <button
+                          key={rating}
+                          onClick={() =>
+                            setDetailedFeedback((prev) => ({
+                              ...prev,
+                              usefulness: rating,
+                            }))
+                          }
+                          className={`w-10 h-10 rounded-full flex items-center justify-center border ${
+                            detailedFeedback.usefulness === rating
+                              ? "bg-blue-500 text-white border-blue-500"
+                              : "border-gray-300 text-gray-700 hover:border-blue-500"
+                          }`}
+                        >
+                          {rating}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      How likely are you to watch more videos like this?
+                    </label>
+                    <div className="flex gap-4">
+                      {ratingOptions.map((rating) => (
+                        <button
+                          key={rating}
+                          onClick={() =>
+                            setDetailedFeedback((prev) => ({
+                              ...prev,
+                              watchMore: rating,
+                            }))
+                          }
+                          className={`w-10 h-10 rounded-full flex items-center justify-center border ${
+                            detailedFeedback.watchMore === rating
+                              ? "bg-blue-500 text-white border-blue-500"
+                              : "border-gray-300 text-gray-700 hover:border-blue-500"
+                          }`}
+                        >
+                          {rating}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Additional Comments
+                    </label>
+                    <textarea
+                      className="w-full p-3 border rounded-md"
+                      rows="4"
+                      placeholder="Share your thoughts..."
+                      value={detailedFeedback.openFeedback}
+                      onChange={(e) =>
+                        setDetailedFeedback((prev) => ({
+                          ...prev,
+                          openFeedback: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+                </div>
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleSubmitFeedback}>
+                Submit Feedback
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
-
-      {/* Detailed Feedback Dialog */}
-      <AlertDialog
-        open={showFeedbackDialog}
-        onOpenChange={setShowFeedbackDialog}
-      >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Additional Feedback</AlertDialogTitle>
-            <AlertDialogDescription>
-              <div className="space-y-6 mt-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    How did you find this information useful?
-                  </label>
-                  <div className="flex gap-4">
-                    {ratingOptions.map((rating) => (
-                      <button
-                        key={rating}
-                        onClick={() =>
-                          setDetailedFeedback((prev) => ({
-                            ...prev,
-                            usefulness: rating,
-                          }))
-                        }
-                        className={`w-10 h-10 rounded-full flex items-center justify-center border ${
-                          detailedFeedback.usefulness === rating
-                            ? "bg-blue-500 text-white border-blue-500"
-                            : "border-gray-300 text-gray-700 hover:border-blue-500"
-                        }`}
-                      >
-                        {rating}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    How likely are you to watch more videos like this?
-                  </label>
-                  <div className="flex gap-4">
-                    {ratingOptions.map((rating) => (
-                      <button
-                        key={rating}
-                        onClick={() =>
-                          setDetailedFeedback((prev) => ({
-                            ...prev,
-                            watchMore: rating,
-                          }))
-                        }
-                        className={`w-10 h-10 rounded-full flex items-center justify-center border ${
-                          detailedFeedback.watchMore === rating
-                            ? "bg-blue-500 text-white border-blue-500"
-                            : "border-gray-300 text-gray-700 hover:border-blue-500"
-                        }`}
-                      >
-                        {rating}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Additional Comments
-                  </label>
-                  <textarea
-                    className="w-full p-3 border rounded-md"
-                    rows="4"
-                    placeholder="Share your thoughts..."
-                    value={detailedFeedback.openFeedback}
-                    onChange={(e) =>
-                      setDetailedFeedback((prev) => ({
-                        ...prev,
-                        openFeedback: e.target.value,
-                      }))
-                    }
-                  />
-                </div>
-              </div>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleSubmitFeedback}>
-              Submit Feedback
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </div>
   );
 };
