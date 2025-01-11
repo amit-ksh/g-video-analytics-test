@@ -23,8 +23,6 @@ const VideoPlayer = () => {
     75: false,
   });
 
-  const [showMood, setShowMood] = useState(false);
-
   const [showFeedbackDialog, setShowFeedbackDialog] = useState(false);
   const [selectedMood, setSelectedMood] = useState(null);
   const [detailedFeedback, setDetailedFeedback] = useState({
@@ -189,10 +187,7 @@ const VideoPlayer = () => {
 
     const trackPlay = () => trackVideoEvent("play", "Video played");
     const trackPause = () => trackVideoEvent("pause", "Video paused");
-    const trackEnded = () => {
-      setShowMood(true);
-      trackVideoEvent("ended", "Video completed");
-    };
+    const trackEnded = () => trackVideoEvent("ended", "Video completed");
     const trackTimeUpdate = () => {
       const progress = Math.floor((video.currentTime / video.duration) * 100);
 
@@ -218,45 +213,50 @@ const VideoPlayer = () => {
   }, [videoRef, progressTracked]);
 
   return (
-    <div className="bg-gray-50 p-4">
+    <div className="max-w-xl mx-auto m-4">
       {/* Video Player */}
-      <div className="aspect-video bg-black mb-8 rounded-lg overflow-hidden">
+      <div className="bg-black mb-4 md:mb-8 mx-4 rounded-lg overflow-hidden">
         <video
           ref={videoRef}
           controls
-          className="w-full max-w-3xl rounded-lg shadow-lg"
+          className="aspect-square w-full h-auto rounded-lg shadow-lg"
         >
-          <source src="/test.mp4" type="video/mp4" />
+          <source
+            src="https://assistant-app-uat-video-pipeline-s3.s3.ap-south-1.amazonaws.com/combined_clip_595afb47-2721-4dcc-afe4-eb759e0a783e.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAZESUWNFNI376LR4V%2F20250111%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20250111T080419Z&X-Amz-Expires=3600&X-Amz-Signature=cf4ef8dd367d21982558c546fd2aa8cecbea7704839b8d8e0489e9069347bb7d&X-Amz-SignedHeaders=host&x-id=GetObject"
+            type="video/mp4"
+          />
           Your browser does not support the video tag.
         </video>
       </div>
 
-      {showMood && (
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <div className="text-center mb-4">
-            <h2 className="text-lg font-semibold text-gray-700">
-              How was your experience?
-            </h2>
-          </div>
-
-          <div className="flex justify-center gap-6">
-            {moods.map((mood) => (
-              <button
-                key={mood.value}
-                onClick={() => handleMoodSelect(mood)}
-                className={cn(
-                  "flex flex-col justify-center items-center aspect-square size-24 p-2 hover:bg-opacity-80 rounded-lg transition-colors group",
-                  mood.color,
-                  selectedMood?.value === mood.value && "ring-2 ring-current"
-                )}
-              >
-                <div className="transition-colors size-10">{mood.icon}</div>
-                <span className="text-sm mt-1">{mood.label}</span>
-              </button>
-            ))}
-          </div>
+      <div className="bg-white p-4 md:p-6 mx-4 rounded-lg shadow-sm">
+        <div className="text-center mb-4">
+          <h2 className="text-base md:text-lg text-gray-700">
+            How was your experience?
+          </h2>
         </div>
-      )}
+
+        <div className="grid grid-cols-5 gap-2 md:gap-4">
+          {moods.map((mood) => (
+            <button
+              key={mood.value}
+              onClick={() => handleMoodSelect(mood)}
+              className={cn(
+                "flex flex-col justify-center items-center aspect-square size-16 md:size-20 p-2 hover:bg-opacity-80 rounded-lg transition-colors group",
+                mood.color,
+                selectedMood?.value === mood.value && "ring-2 ring-current"
+              )}
+            >
+              <div className="transition-colors size-6 md:size-8">
+                {mood.icon}
+              </div>
+              <span className="text-xs md:text-sm mt-1 text-nowrap">
+                {mood.label}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* Detailed Feedback Dialog */}
       <AlertDialog
@@ -348,11 +348,6 @@ const VideoPlayer = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-
-      {/* Powered By Footer */}
-      <div className="text-center mt-8 text-sm text-gray-500">
-        Powered by <span className="font-semibold">SynthLabs</span>
-      </div>
     </div>
   );
 };
