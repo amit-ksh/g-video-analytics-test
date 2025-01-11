@@ -15,7 +15,6 @@ import {
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
 
 export default function AnalyticsPage() {
-  const [analyticsData, setAnalyticsData] = useState(null);
   const [processedData, setProcessedData] = useState({
     eventCounts: [],
     pageViews: [],
@@ -27,7 +26,6 @@ export default function AnalyticsPage() {
     fetch("/api/analytics")
       .then((res) => res.json())
       .then((data) => {
-        setAnalyticsData(data);
         processAnalyticsData(data);
       });
   }, []);
