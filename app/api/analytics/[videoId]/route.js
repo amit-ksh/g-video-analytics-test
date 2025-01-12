@@ -1,4 +1,3 @@
-// app/api/analytics/[videoId]/route.ts
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
 
 const analyticsDataClient = new BetaAnalyticsDataClient({
