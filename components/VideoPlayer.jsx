@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { trackVideoEvent } from "../lib/analytics";
+import { useState, useRef } from "react";
 
 import {
   AlertDialog,
@@ -14,14 +13,13 @@ import {
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 import { cn } from "@/lib/utils";
+import { useVideoAnalytics } from "@/app/hooks/use-video-analytics";
+import { useParams } from "next/navigation";
 
 const VideoPlayer = () => {
+  const { videoId } = useParams();
   const videoRef = useRef(null);
-  const [progressTracked, setProgressTracked] = useState({
-    25: false,
-    50: false,
-    75: false,
-  });
+  useVideoAnalytics(videoRef, videoId);
 
   const [showFeedbackDialog, setShowFeedbackDialog] = useState(false);
   const [selectedMood, setSelectedMood] = useState(null);
@@ -181,37 +179,6 @@ const VideoPlayer = () => {
     setShowFeedbackDialog(false);
   };
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const trackPlay = () => trackVideoEvent("play", "Video played");
-    const trackPause = () => trackVideoEvent("pause", "Video paused");
-    const trackEnded = () => trackVideoEvent("ended", "Video completed");
-    const trackTimeUpdate = () => {
-      const progress = Math.floor((video.currentTime / video.duration) * 100);
-
-      [25, 50, 75].forEach((milestone) => {
-        if (progress >= milestone && !progressTracked[milestone]) {
-          trackVideoEvent("progress", `${milestone}% watched`);
-          setProgressTracked((prev) => ({ ...prev, [milestone]: true }));
-        }
-      });
-    };
-
-    video.addEventListener("play", trackPlay);
-    video.addEventListener("pause", trackPause);
-    video.addEventListener("ended", trackEnded);
-    video.addEventListener("timeupdate", trackTimeUpdate);
-
-    return () => {
-      video.removeEventListener("play", trackPlay);
-      video.removeEventListener("pause", trackPause);
-      video.removeEventListener("ended", trackEnded);
-      video.removeEventListener("timeupdate", trackTimeUpdate);
-    };
-  }, [videoRef, progressTracked]);
-
   return (
     <div className="h-full max-w-lg mx-auto flex flex-col justify-between gap-4">
       {/* Filler to center the video element */}
@@ -224,10 +191,7 @@ const VideoPlayer = () => {
           controls
           className="aspect-square w-full h-auto rounded-lg shadow-lg"
         >
-          <source
-            src="https://assistant-app-uat-video-pipeline-s3.s3.amazonaws.com/combined_clip_2136481b-b6bd-4f95-943e-087c3525efb9.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZESUWNFNI376LR4V%2F20250111%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20250111T085850Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Security-Token=&X-Amz-Signature=25226a5837ab849aee0fb7cf7f76606d22f1e38a6cf35fc11e511ed8e7723d8b"
-            type="video/mp4"
-          />
+          <source src="/test.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
