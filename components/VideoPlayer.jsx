@@ -172,10 +172,6 @@ const VideoPlayer = () => {
   };
 
   const handleSubmitFeedback = () => {
-    console.log({
-      mood: selectedMood,
-      detailedFeedback,
-    });
     setShowFeedbackDialog(false);
   };
 

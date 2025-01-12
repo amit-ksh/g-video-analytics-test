@@ -10,17 +10,14 @@ const analyticsDataClient = new BetaAnalyticsDataClient({
 const propertyId = process.env.GA_PROPERTY_ID;
 
 export async function GET(request, { params }) {
-  const { videoId } = params;
+  const { videoId } = await params;
 
-  try {
+  const analyticsRequests = [
     // Basic video metrics
-    const [basicMetricsResponse] = await analyticsDataClient.runReport({
+    analyticsDataClient.runReport({
       property: `properties/${propertyId}`,
       dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
-      dimensions: [
-        { name: "eventName" },
-        { name: "customEvent:video_id" }, // Make sure this custom dimension exists in GA4
-      ],
+      dimensions: [{ name: "eventName" }, { name: "customEvent:video_id" }],
       metrics: [{ name: "eventCount" }],
       dimensionFilter: {
         andGroup: {
@@ -46,10 +43,10 @@ export async function GET(request, { params }) {
           ],
         },
       },
-    });
+    }),
 
     // Device breakdown
-    const [deviceResponse] = await analyticsDataClient.runReport({
+    analyticsDataClient.runReport({
       property: `properties/${propertyId}`,
       dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
       dimensions: [{ name: "device" }, { name: "customEvent:video_id" }],
@@ -63,10 +60,10 @@ export async function GET(request, { params }) {
           },
         },
       },
-    });
+    }),
 
     // Retention data
-    const [retentionResponse] = await analyticsDataClient.runReport({
+    analyticsDataClient.runReport({
       property: `properties/${propertyId}`,
       dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
       dimensions: [
@@ -83,10 +80,10 @@ export async function GET(request, { params }) {
           },
         },
       },
-    });
+    }),
 
     // Most watched segments
-    const [segmentsResponse] = await analyticsDataClient.runReport({
+    analyticsDataClient.runReport({
       property: `properties/${propertyId}`,
       dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
       dimensions: [
@@ -103,34 +100,40 @@ export async function GET(request, { params }) {
           },
         },
       },
-    });
+    }),
+  ];
 
-    // Process and transform the data
-    const processResponse = (response) => {
-      return (
-        response.rows?.map((row) => ({
-          dimensions: row.dimensionValues.map((dim) => dim.value),
-          metrics: row.metricValues.map((metric) => metric.value),
-        })) || []
-      );
-    };
+  const results = await Promise.allSettled(analyticsRequests);
 
-    return Response.json({
-      basicMetrics: processResponse(basicMetricsResponse),
-      deviceTypes: processResponse(deviceResponse),
-      retention: processResponse(retentionResponse),
-      segments: processResponse(segmentsResponse),
-    });
-  } catch (error) {
-    console.error("Google Analytics API Error:", error);
-    return Response.json(
-      {
-        error: "Failed to fetch analytics data",
-        details: error.message,
-      },
-      {
-        status: 500,
-      }
-    );
-  }
+  const processResponse = (response) => {
+    if (!response || !response.rows) return [];
+    return response.rows.map((row) => ({
+      dimensions: row.dimensionValues.map((dim) => dim.value),
+      metrics: row.metricValues.map((metric) => metric.value),
+    }));
+  };
+
+  const [basicMetrics, deviceTypes, retention, segments] = results.map(
+    (result) =>
+      result.status === "fulfilled" ? processResponse(result.value[0]) : []
+  );
+
+  return Response.json({
+    basicMetrics,
+    deviceTypes,
+    retention,
+    segments,
+    errors: results
+      .map((result, index) =>
+        result.status === "rejected"
+          ? {
+              type: ["basicMetrics", "deviceTypes", "retention", "segments"][
+                index
+              ],
+              error: result.reason?.message,
+            }
+          : null
+      )
+      .filter(Boolean),
+  });
 }

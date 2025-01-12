@@ -1,5 +1,6 @@
 "use client";
 
+import { sendGAEvent } from "@next/third-parties/google";
 import { useEffect, useRef } from "react";
 
 // declare global {
@@ -24,7 +25,7 @@ export const useVideoAnalytics = (videoRef, videoId) => {
 
     // Initialize video view
     const initializeView = () => {
-      window.gtag("event", "video_start", {
+      sendGAEvent("event", "video_start", {
         event_category: "Video",
         event_label: videoId,
         video_id: videoId,
@@ -64,7 +65,7 @@ export const useVideoAnalytics = (videoRef, videoId) => {
         updateWatchedSegment(video.currentTime);
       }, 1000);
 
-      window.gtag("event", "video_play", {
+      sendGAEvent("event", "video_play", {
         event_category: "Video",
         event_label: videoId,
         video_id: videoId,
@@ -77,7 +78,7 @@ export const useVideoAnalytics = (videoRef, videoId) => {
       clearInterval(playTimer);
       const watchDuration = (Date.now() - startTime) / 1000;
 
-      window.gtag("event", "video_pause", {
+      sendGAEvent("event", "video_pause", {
         event_category: "Video",
         event_label: videoId,
         video_id: videoId,
@@ -91,7 +92,7 @@ export const useVideoAnalytics = (videoRef, videoId) => {
       clearInterval(playTimer);
       const watchDuration = (Date.now() - startTime) / 1000;
 
-      window.gtag("event", "video_complete", {
+      sendGAEvent("event", "video_complete", {
         event_category: "Video",
         event_label: videoId,
         video_id: videoId,
@@ -101,7 +102,7 @@ export const useVideoAnalytics = (videoRef, videoId) => {
 
       // Send most watched segments data
       const segmentData = Object.fromEntries(watchedSegments.current);
-      window.gtag("event", "video_segments_watched", {
+      sendGAEvent("event", "video_segments_watched", {
         event_category: "Video",
         event_label: videoId,
         video_id: videoId,
@@ -131,7 +132,7 @@ export const useVideoAnalytics = (videoRef, videoId) => {
     };
 
     const handleSeeking = () => {
-      window.gtag("event", "video_seek", {
+      sendGAEvent("event", "video_seek", {
         event_category: "Video",
         event_label: videoId,
         video_id: videoId,
@@ -142,7 +143,7 @@ export const useVideoAnalytics = (videoRef, videoId) => {
     };
 
     const handleRateChange = () => {
-      window.gtag("event", "playback_rate_change", {
+      sendGAEvent("event", "playback_rate_change", {
         event_category: "Video",
         event_label: videoId,
         video_id: videoId,
@@ -152,7 +153,7 @@ export const useVideoAnalytics = (videoRef, videoId) => {
     };
 
     const handleVolumeChange = () => {
-      window.gtag("event", "volume_change", {
+      sendGAEvent("event", "volume_change", {
         event_category: "Video",
         event_label: videoId,
         video_id: videoId,
@@ -163,7 +164,7 @@ export const useVideoAnalytics = (videoRef, videoId) => {
     };
 
     const handleFullscreenChange = () => {
-      window.gtag("event", "fullscreen_change", {
+      sendGAEvent("event", "fullscreen_change", {
         event_category: "Video",
         event_label: videoId,
         video_id: videoId,
@@ -173,7 +174,7 @@ export const useVideoAnalytics = (videoRef, videoId) => {
     };
 
     const trackRetention = (percentage) => {
-      window.gtag("event", "video_retention", {
+      sendGAEvent("event", "video_retention", {
         event_category: "Video",
         event_label: videoId,
         video_id: videoId,

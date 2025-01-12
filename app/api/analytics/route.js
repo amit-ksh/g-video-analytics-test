@@ -83,5 +83,11 @@ export async function GET() {
     eventsData: eventsReport?.value?.[0]?.rows,
     deviceData: deviceReport?.value?.[0]?.rows,
     retentionData: retentionReport?.value?.[0]?.rows,
+    errors: [
+      viewsReport?.reason?.message,
+      eventsReport?.reason?.message,
+      deviceReport?.reason?.message,
+      retentionReport?.reason?.message,
+    ].filter(Boolean),
   });
 }
