@@ -3,17 +3,11 @@
 import { sendGAEvent } from "@next/third-parties/google";
 import { useEffect, useRef } from "react";
 
-// declare global {
-//   interface Window {
-//     gtag: (command: string, action: string, params: any) => void;
-//   }
-// }
-
 export const useVideoAnalytics = (videoRef, videoId) => {
   // Store timestamp ranges for most watched sections
   const watchedSegments = useRef(new Map()); // Key: segmentStart, Value: viewCount
   const lastPosition = useRef(0);
-  const segmentInterval = 1; // Track every 1 seconds segment
+  const segmentInterval = 5; // Track every 5 seconds segment
 
   useEffect(() => {
     const video = videoRef.current;
