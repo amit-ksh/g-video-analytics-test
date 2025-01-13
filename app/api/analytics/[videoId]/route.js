@@ -49,14 +49,16 @@ export async function GET(request, { params }) {
     analyticsDataClient.runReport({
       property: `properties/${propertyId}`,
       dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
-      dimensions: [{ name: "device" }, { name: "customEvent:video_id" }],
+      dimensions: [
+        { name: "deviceCategory" },
+        { name: "customEvent:video_id" },
+      ],
       metrics: [{ name: "eventCount" }],
       dimensionFilter: {
         filter: {
           fieldName: "customEvent:video_id",
           stringFilter: {
             value: videoId,
-            matchType: "EXACT",
           },
         },
       },
